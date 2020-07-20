@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "artburlaka/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "artburlaka/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "artburlaka/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "artburlaka/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
